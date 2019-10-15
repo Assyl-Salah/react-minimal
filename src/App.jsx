@@ -9,6 +9,14 @@ const App=()=>(
   <p>{(generateRandomArray(10).map(x=>" "+x))}</p>
   <p>{(A1.filter(isBigEnough(15)).map(x=>" " +x))}</p>
   <p>{(squares(A2).map(x=> " " +x))}</p>
+
+  <p>
+ <button onClick={ AllStudents}> All students</button>
+ <button onClick={Sort}> Sorted students</button>
+ <button onClick={Old} > Old students</button>
+ 
+ <ul id="student"></ul>
+ </p>
   </div>
 
   )
@@ -92,4 +100,26 @@ const data=[
     ]
   }
 ]
+
+
+function AllStudents()
+{
+  var studentt=[];
+data.forEach(x=>x.students.forEach(x=>studentt.push(x.name)));
+document.getElementById('student').innerHTML = studentt.toLocaleString();
+}
+function Sort()
+{
+  var studentt=[];
+data.forEach(x=>x.students.forEach(x=>studentt.push(x.name)));
+studentt.sort();
+document.getElementById('student').innerHTML= studentt.toLocaleString();
+}
+function Old()
+{
+  var studentt=[];
+data.forEach(x=>{if(x.active) x.students.forEach(x=>{if(x.age>20) studentt.push(x.name)})});
+  studentt.sort(); 
+  document.getElementById('student').innerHTML = studentt.toLocaleString();
+}
 export default App
