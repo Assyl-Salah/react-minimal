@@ -6,12 +6,24 @@ class App extends React.Component{
  
 constructor(props){
 super(props);
+this.state={
+  a: ' ',
+  b: ' '
+}
+this.ahandler=this.ahandler.bind(this);
+this.bhandler=this.bhandler.bind(this);
+
 }
 ahandler(event){
-  console.log("The value of field a is :" + event.target.value);
+  this.setState({
+   a: event.target.value
+  },(nextState)=>console.log(this.state.a));
+  
 }
 bhandler(event){
-  console.log("The value of field b is :" + event.target.value);
+  this.setState({
+    b: event.target.value
+   },(nextState)=>console.log(this.state.b));
 }
 render(){
   return(
@@ -23,10 +35,11 @@ render(){
         <input type="number" onChange={this.ahandler} ></input>
         
         <input type="number" onChange={this.bhandler} ></input>
+        <p>{(this.state.a<this.state.b && this.state.a>0)&&(generateArray(Number(this.state.a) , Number(this.state.b)).map(index=>" "+index++))}}</p>
         </div>
   );
 }
 }
-
+const generateArray = (start, end) => Array.from({length: end}, (_, i) => start + i);
 
 export default App
