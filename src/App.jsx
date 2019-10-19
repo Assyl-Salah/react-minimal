@@ -9,12 +9,14 @@ super(props);
 this.state={
   a: ' ',
   b: ' ' ,
-  iteration : ''
+  iter : 0 ,
+ 
 }
 this.ahandler=this.ahandler.bind(this);
 this.bhandler=this.bhandler.bind(this);
 
 }
+
 ahandler(event){
   this.setState({
    a: event.target.value
@@ -27,25 +29,27 @@ bhandler(event){
    },(nextState)=>console.log(this.state.b));
 }
 render(){
-  console.time("Render");
+  
   return(
     
     <div>
-      <h1>React Minimal Salaha</h1>
-      <br></br>
+       <p>{(console.time("render"+this.state.iter))}</p>
+     
+      <h1>Lab2</h1>
+    <br></br>
       <AppTitle></AppTitle>
       <br></br>
         <input type="number" onChange={this.ahandler} ></input>
-        
         <input type="number" onChange={this.bhandler} ></input>
+        <br></br>
         <p>{(this.state.a<this.state.b && this.state.a>0)&&(generateArray(Number(this.state.a) , Number(this.state.b)).map(index=>" "+index++))}</p>
-        </div>
-        
-  );
-  console.timeEnd("Render");
+        <p>{(console.timeEnd("render" +this.state.iter++))}</p>
+       </div>
+  ); 
 }
   }
 
   const generateArray = (start, end) => Array.from({length: end}, (_, i) => start + i);
+  
 
   export default App
